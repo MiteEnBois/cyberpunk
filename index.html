@@ -1,0 +1,113 @@
+<html>
+<style>
+body {
+        background-color: #431c53;
+        background-image: url("cyberpunk.jpg");
+        background-repeat: no-repeat;
+        background-size: 0% 100%;
+        text-align: center;
+        font-weight: bold;
+        font-family: "impact";
+        color:  #8337a3;
+        padding-top: 15%;
+		text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+    }
+    
+    .text {
+        font-size: 5vw;
+    }
+    
+    #percent {
+        margin-top: 8%;
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+        font-family: "impact";
+		color : #8337a3;
+		text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+    }
+	
+}
+</style>
+<link rel="shortcut icon" href="favicon.ico">
+
+<body id="myBar">
+    <h1 class="text">Cyberpunk 2077</h1>
+    <p id="demo" class="text">Wait plz</p>
+    <button onclick="stop('test')" id="percent"></button>
+
+</body>
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("April 16, 2020 12:00:00").getTime();
+    var dateNow = new Date("Jan 10, 2013 00:00:00").getTime();
+    var i = 0;
+	
+	
+	
+    //var audio = new Audio('ittakesforever.mp3');
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        var barPercent = (now - dateNow) * 100 / (countDownDate - dateNow);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+        if (barPercent > 100)
+            barPercent = 100;
+        if (i == 0 && distance > 0) {
+            i = 1;
+
+            audio.play();
+
+        }
+        document.getElementById("percent").innerHTML = barPercent.toPrecision(5) + "%"
+
+        // If the count down is finished, write some text 
+        if (distance < 0) {
+            //clearInterval(x);
+            document.getElementById("demo").innerHTML = "HAS COME";
+            var back = String(document.getElementById("myBar").style.backgroundImage)
+            if (back === "url(\"cyberpunk_inverted.jpg\")")
+                document.getElementById("myBar").style.backgroundImage = "url(\"cyberpunk.jpg\")";
+            else
+                document.getElementById("myBar").style.backgroundImage = "url(\"cyberpunk_inverted.jpg\")";
+
+        }
+
+        var elem = document.getElementById("myBar");
+
+        elem.style.backgroundSize = barPercent + "% 100%";
+
+    }, 100);
+
+    function stop(id) {
+        audio.pause();
+    }
+</script>
+
+</html>
